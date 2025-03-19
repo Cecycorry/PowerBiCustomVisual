@@ -1,7 +1,7 @@
 /* eslint-disable powerbi-visuals/no-implied-inner-html */
 import IVisualEventService = powerbi.extensibility.IVisualEventService;
-import * as d3 from "d3";
-import "./interfaces";
+import * as d3 from "d3";import DataView = powerbi.DataView;
+
 import powerbi from "powerbi-visuals-api";import VisualObjectInstance=powerbi.VisualObjectInstance
 import IVisual = powerbi.extensibility.visual.IVisual;
 import VisualConstructorOptions = powerbi.extensibility.visual.VisualConstructorOptions;
@@ -18,7 +18,11 @@ import IVisualHost = powerbi.extensibility.visual.IVisualHost;
 import EnumerateVisualObjectInstancesOptions = powerbi.EnumerateVisualObjectInstancesOptions;
 import VisualTooltipDataItem = powerbi.extensibility.VisualTooltipDataItem;
 import ILocalizationManager = powerbi.extensibility.ILocalizationManager;import {  TooltipEventArgs, TooltipEnabledDataPoint } from "powerbi-visuals-utils-tooltiputils";
-
+import {
+    valueFormatter as vf,
+    textMeasurementService as tms,
+    valueFormatter
+} from "powerbi-visuals-utils-formattingutils";
 import VisualObjectInstanceEnumeration = powerbi.VisualObjectInstanceEnumeration;
 
 interface IHierarchyIdentityFilter<IdentityType> extends IFilter {
@@ -95,7 +99,7 @@ private tooltipServiceWrapper: ITooltipServiceWrapper;
     
         button.append("span")
             .attr("class", "dropdown-label")
-            .text(this.fieldName || "");
+            .text(this.fieldName );
     
         button.append("span")
             .attr("class", "dropdown-arrow")
@@ -117,8 +121,8 @@ private tooltipServiceWrapper: ITooltipServiceWrapper;
             .style("background-color", "white")
             .style("border", "1px solid #ccc")
             .style("box-shadow", "0px 0px 10px rgba(0, 0, 0, 0.1)")
-            .style("z-index", "1000");
-    }
+       // Assicurati che la posizione sia assoluta
+            ;}
     public update(options: VisualUpdateOptions) { 
         this.host.eventService.renderingStarted(options);
 
@@ -243,11 +247,11 @@ button.select(".dropdown-label")
     }
 
     private populateDropdownOptions(values: any[], selectionIds: ISelectionId[]) {
-        console.log("populateDropdownOptions called with values:", values); // Log per verificare i valori passati
+        console.log("populateDropdownOptions called with values:", values);
         const dropdownOptionsContainer = this.dropdownContainer.select(".dropdown-options")
             .style("background-color", "transparent");
     
-        dropdownOptionsContainer.selectAll("*").remove(); // Pulisci il contenitore
+        dropdownOptionsContainer.selectAll("*").remove();
     
         values.forEach((value, index) => {
             const checkboxContainer = dropdownOptionsContainer.append("div")
@@ -264,10 +268,25 @@ button.select(".dropdown-label")
                         .style("color", this.isHighContrast ? this.foregroundColor : this.settings.general.listColor);
                 });
     
+            let isChecked = false;
+            this.selectedValues.forEach(selectedValue => {
+                if (value instanceof Date && selectedValue instanceof Date) {
+                    // Confronta le date utilizzando getTime() per confrontare i timestamp
+                    if (value.getTime() === selectedValue.getTime()) {
+                        isChecked = true;
+                    }
+                } else {
+                    // Confronta altri tipi di valori normalmente
+                    if (value === selectedValue) {
+                        isChecked = true;
+                    }
+                }
+            });
+    
             checkboxContainer.append("input")
                 .attr("type", "checkbox")
                 .attr("id", `checkbox-${index}`)
-                .property("checked", this.selectedValues.has(value))
+                .property("checked", isChecked)
                 .on("change", (event: Event) => this.onCheckboxChange(event, value, selectionIds));
     
             checkboxContainer.append("label")
@@ -276,8 +295,8 @@ button.select(".dropdown-label")
                 .text(this.formatValue(value));
         });
     
-        console.log("Dropdown options populated with filtered values."); // Log per confermare il popolamento
-    }    private clear() {
+        console.log("Dropdown options populated with filtered values.");
+    }  private clear() {
         this.renderFiltered = null; // reset the renderFiltered function when data is epmty
         if (this.tableView) {
             this.tableView.empty();
@@ -300,9 +319,16 @@ button.select(".dropdown-label")
         });
     }
 
-    private formatValue(value: any): string {
-        return value instanceof Date ? value.toLocaleDateString() : value.toString();
+private formatValue(value: any): string {
+    if (value instanceof Date) {
+        return value.toLocaleDateString(this.locale);
+    } else if (typeof value === 'number') {
+        return value.toLocaleString(this.locale);
+    } else {
+        return value.toString();
     }
+}
+
     private addClearAllButtonListener() {
         const clearAllButton = this.dropdownContainer.select(".clear-all-btn");
     
@@ -346,9 +372,15 @@ button.select(".dropdown-label")
     
         return values.filter((value: any) => {
             const formattedValue = this.formatValue(value);
-            return formattedValue?.toLowerCase().includes(lowerCaseSearchTerm);
+            if (typeof value === 'number') {
+                // Confronta i numeri direttamente
+                return value.toString().includes(lowerCaseSearchTerm);
+            } else {
+                // Confronta le stringhe
+                return formattedValue?.toLowerCase().includes(lowerCaseSearchTerm);
+            }
         });
-    } 
+    }
     
  
     // Metodo per ripulire la ricerca
@@ -370,7 +402,7 @@ button.select(".dropdown-label")
     
         console.log("Updating Dropdown Options with Values:", filteredValues); // Log dei valori aggiornati nel dropdown
     
-        if (filteredValues.length > 0) {
+        if (filteredValues) {
             this.populateDropdownOptions(filteredValues, this.createSelectionIds(filteredValues));
         } else {
             dropdownOptionsContainer.append("div")
@@ -478,7 +510,7 @@ button.select(".dropdown-label")
        
     }
     private updateSelection(selectionIds: ISelectionId[]) {
-        if (selectionIds.length > 0) {
+        if (selectionIds.length ) {
             this.selectionManager.select(selectionIds).then(() => {
                 console.log("Applying filter with selected values:", selectionIds);
                 this.host.applyJsonFilter(
@@ -528,7 +560,7 @@ button.select(".dropdown-label")
             console.log(`Chip created for value:`, value);
         });
     
-        if (hiddenValues.length > 0) {
+        if (hiddenValues.length) {
             const viewMore = chipContainer.append("div")
                 .attr("class", "chip-view-more")
                 .style("display", "inline-flex")
@@ -574,8 +606,8 @@ button.select(".dropdown-label")
     
     // Metodo per ripristinare i valori selezionati al cambio di pagina
     private restoreSelectedChips(options: VisualUpdateOptions) {
-        if (options.jsonFilters && options.jsonFilters.length > 0) {
-            const restoredValues = new Set<string>();
+        if (options.jsonFilters && options.jsonFilters.length) {
+            const restoredValues = new Set<any>(); // Usa Set<any> per gestire diversi tipi di valori
     
             options.jsonFilters.forEach((filter) => {
                 if ((filter as any).conditions) {
@@ -583,14 +615,14 @@ button.select(".dropdown-label")
                     const conditions = (filter as any).conditions;
                     conditions.forEach((condition: any) => {
                         if (condition.value) {
-                            restoredValues.add(condition.value.toString());
+                            restoredValues.add(this.parseValue(condition.value)); // Aggiungi il valore nel suo tipo originale
                         }
                     });
                 } else if ((filter as IBasicFilter).values) {
                     // Se il filtro è un BasicFilter
                     const basicFilter = filter as IBasicFilter;
                     basicFilter.values.forEach((value) => {
-                        restoredValues.add(value.toString());
+                        restoredValues.add(this.parseValue(value)); // Aggiungi il valore nel suo tipo originale
                     });
                 }
             });
@@ -600,6 +632,13 @@ button.select(".dropdown-label")
             // Ricarica i chip selezionati
             this.updateChips(Array.from(this.selectedValues));
         }
+    }
+    
+    private parseValue(value: any): any {
+        if (typeof value === 'string' && !isNaN(Date.parse(value))) {
+            return new Date(value); // Se il valore è una stringa e può essere convertito in data, restituisci una data
+        }
+        return value; // Altrimenti, restituisci il valore originale
     }
     
     private clearAllSelections(values: any[]) {
@@ -633,11 +672,17 @@ button.select(".dropdown-label")
         console.log("createMultiSelectFilter called with values:", filterValues); // Log per verificare i valori passati
     
         return new BasicFilter(filterTarget, "In", filterValues as (string | number | boolean)[]);
-    }  
+    }
    
     public enumerateObjectInstances(options: EnumerateVisualObjectInstancesOptions): VisualObjectInstanceEnumeration {
-        return VisualSettings.enumerateObjectInstances(this.settings || VisualSettings.getDefault(), options); instanceKind: powerbi.VisualEnumerationInstanceKinds.ConstantOrRule // <=== Support conditional formatting
-    }
+        let instances = VisualSettings.enumerateObjectInstances(this.settings || VisualSettings.getDefault(), options); instanceKind: powerbi.VisualEnumerationInstanceKinds.ConstantOrRule // <=== Support conditional formatting
+   
+        if (this.dataView) {
+            let objects = null;
+            if (this.dataView && this.dataView.metadata) {
+                objects = this.dataView.metadata.objects;
+            }
+        } return instances; }
 }
 function d3Select(element: any): any {
     throw new Error("Function not implemented.");
