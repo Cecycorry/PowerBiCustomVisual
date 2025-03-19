@@ -1,0 +1,410 @@
+{
+    "dataRoles": [
+        {
+            "name": "category",
+            "kind": "Grouping",
+            "displayName": "Field",
+            "displayNameKey": "Role_Field"
+        }
+    ],
+    "dataViewMappings":   [
+        {
+            "conditions": [
+                {
+                    "category": { "max": 1 }
+                }
+            ],
+            "categorical": {
+                "categories": {
+                    "for": {
+                        "in": "category"
+                    },
+                    "dataReductionAlgorithm": {
+                        "top": {
+                            "count": 100000000
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "objects": {
+        "general": {
+            "displayName": "General",
+            "displayNameKey": "formattingGeneral",
+            "properties": {
+                "filter": {
+                    "type": {
+                        "filter": true
+                    }
+                }, "selectedValues": {
+                    "type": { "text": true }
+                }, "fontFamily": {
+                    "displayName": "Font Family","displayNameKey": "Font Family",
+                    "type": {
+                        "enumeration":
+                            [
+                                { "value": "Arial", "displayName": "Arial" },
+                                { "value": "Arial Black", "displayName": "Arial Black" },
+                                { "value": "Arial Unicode MS" ,"displayName":"Arial Unicode MS"},
+                                { "value": "Calibri" ,"displayName":"Calibri"},
+                                { "value": "Cambria", "displayName": "Cambria" },
+                                { "value": "Cambria Math", "displayName": "Cambria Math" },
+                                { "value": "Candara", "displayName": "Candara" },
+                                { "value": "Comic Sans MS", "displayName": "Comic Sans MS" },
+                                { "value": "Consolas", "displayName": "Consolas" },
+                                { "value": "Constantia", "displayName": "Constantia" },
+                                { "value": "Corbel", "displayName": "Corbel" },
+                                { "value": "Courier New","displayName": "Courier New" },
+                                { "value": "Din", "displayName": "Din" },
+                                { "value": "Din Light", "displayName": "Din Light" },
+                                { "value": "Georgia", "displayName": "Georgia" },
+                                { "value": "Lucida Sans Unicode", "displayName": "Lucida Sans Unicode" },
+                                { "value": "Segoe UI", "displayName": "Segoe UI" },
+                                { "value": "Segoe UI Light", "displayName": "Segoe UI Light" },
+                                { "value": "Segoe UI Semibold", "displayName": "Segoe UI Semibold" },
+                                { "value": "Segoe UI Bold", "displayName": "Segoe UI Bold" },
+                                { "value": "Tahoma", "displayName": "Tahoma" },
+                                { "value": "Times New Roman", "displayName": "Times New Roman" },
+                                { "value": "Trebuchet MS", "displayName": "Trebuchet MS" },
+                                { "value": "Verdana", "displayName": "Verdana" },
+                                { "value": "Wingdings", "displayName": "Wingdings" }
+                           
+                           
+                            ]
+                        }
+                    }
+                ,
+                "fontColor": {
+                    "displayName": "Font Color","displayNameKey": "Font Color",
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },      "hoverColor": {
+                    "displayName": "Hover Color","displayNameKey": "Hover Color",
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },  "hoverLableColor": {
+                    "displayName": "Hover Label Color",   "displayNameKey": "Hover Label Color",
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },  "boxshadowcolor": {
+                    "displayName": "box-shadow drop Color",          "displayNameKey": "box-shadow drop Color",
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "listColor": {
+                    "displayName": "Font List Color",   "displayNameKey": "List Color",
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "backgroundColor": {
+                    "displayName": "Background Color",     "displayNameKey": "Background Color",
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "borderColor": {
+                    "displayName": "Border Color",  "displayNameKey": "Border Color",
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+             "arrowShape": {
+                    "displayName": "Arrow Shape",    "displayNameKey": "Arrow Shape",
+                    "type": {
+                        "enumeration":
+                            [
+                                { "value": "⛛", "displayName": "⛛" },
+                                { "value": "▼", "displayName": "▼" },
+                                { "value": "˅", "displayName": "˅" },
+                               {"value":"﹀","displayName": "﹀"}
+                            ]
+                        }
+                    }
+                ,
+                "checkboxCheckedColor": {
+                    "displayName": "Checkbox Checked Color","displayNameKey": "Checkbox Checked Color",
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+              "textBold": {
+                    "displayName": "Bold", "displayNameKey": "Bold",
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "textItalic": {
+                    "displayName": "Italic","displayNameKey": "Italic",
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "textUnderline": {
+                    "displayName": "Underline","displayNameKey": "Underline",
+                    "type": {
+                        "bool": true
+                    }
+               
+        },
+             
+                "arrowColor": {
+                    "displayName": "Arrow Color", "displayNameKey": "Arrow Color",
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+             
+                "fontSize": {
+                    "displayName": "Font Size",  "displayNameKey": "Font Size",
+                    "type": {
+                        "numeric": true
+                    }
+                },
+                "borderRadius": {
+                    "displayName": "Border Radius",            "displayNameKey": "Border Radius",
+                    "type": {
+                        "numeric": true
+                    }
+                },
+                "BorderWidth": {
+                    "displayName": "Border Width", "displayNameKey": "Border Width",
+                    "type": {
+                        "numeric": true
+                    }
+                },
+                "padding": {
+                    "displayName": "Padding",  "displayNameKey": "Padding",
+                    "type": {
+                        "numeric": true
+                    }
+                }
+            }
+        },
+        "chips": {
+            "displayName": "Chips",
+            "properties": {
+                "chipColor": {
+                    "displayName": "Chip Background Color",  "displayNameKey": "Chip Background Color",
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "chipInternbg": {
+                    "displayName": "Chip Internal Color","displayNameKey": "Chip Internal Color",
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+           
+                "chipTextColor": {
+                    "displayName": "Chip Text Color",  "displayNameKey": "Chip Text Color",
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "chipBorderRadius": {
+                    "displayName": "Chip Border Radius",  "displayNameKey": "Chip Border Radius",
+                    "type": {
+                        "numeric": true
+                    }
+                }, "fontFamily": {
+                    "displayName": "Font Family",  "displayNameKey": "Font Family",
+                    "type": {
+                        "enumeration":
+                            [
+                                { "value": "Arial", "displayName": "Arial" },
+                                { "value": "Arial Black", "displayName": "Arial Black" },
+                                { "value": "Arial Unicode MS" ,"displayName":"Arial Unicode MS"},
+                                { "value": "Calibri" ,"displayName":"Calibri"},
+                                { "value": "Cambria", "displayName": "Cambria" },
+                                { "value": "Cambria Math", "displayName": "Cambria Math" },
+                                { "value": "Candara", "displayName": "Candara" },
+                                { "value": "Comic Sans MS", "displayName": "Comic Sans MS" },
+                                { "value": "Consolas", "displayName": "Consolas" },
+                                { "value": "Constantia", "displayName": "Constantia" },
+                                { "value": "Corbel", "displayName": "Corbel" },
+                                { "value": "Courier New","displayName": "Courier New" },
+                                { "value": "Din", "displayName": "Din" },
+                                { "value": "Din Light", "displayName": "Din Light" },
+                                { "value": "Georgia", "displayName": "Georgia" },
+                                { "value": "Lucida Sans Unicode", "displayName": "Lucida Sans Unicode" },
+                                { "value": "Segoe UI", "displayName": "Segoe UI" },
+                                { "value": "Segoe UI Light", "displayName": "Segoe UI Light" },
+                                { "value": "Segoe UI Semibold", "displayName": "Segoe UI Semibold" },
+                                { "value": "Segoe UI Bold", "displayName": "Segoe UI Bold" },
+                                { "value": "Tahoma", "displayName": "Tahoma" },
+                                { "value": "Times New Roman", "displayName": "Times New Roman" },
+                                { "value": "Trebuchet MS", "displayName": "Trebuchet MS" },
+                                { "value": "Verdana", "displayName": "Verdana" },
+                                { "value": "Wingdings", "displayName": "Wingdings" }
+                            ]
+                        }
+                    }
+                ,  "textBold": {
+                    "displayName": "Bold","displayNameKey": "Bold",
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "textItalic": {
+                    "displayName": "Italic", "displayNameKey": "Italic",
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "textUnderline": {
+                    "displayName": "Underline",    "displayNameKey": "Underline",
+                    "type": {
+                        "bool": true
+                    }
+               
+        },
+                "chipFontSize": {
+                    "displayName": "Chip Font Size", "displayNameKey": "Chip Font Size",
+                    "type": {
+                        "numeric": true
+                    }
+                }
+            }
+        },  "search": {
+            "displayName": "Search","displayNameKey": "Search",
+            "properties": {
+                "addSelection": {
+                    "displayName": "Enable Search",   "displayNameKey": "Add Selection",
+                    "description": "Add search selection",
+                    "type": {
+                        "bool": true
+                    }
+                }, "fontColor": {
+                    "displayName": "Font color",  "displayNameKey": "Font Color",
+                    "description": "Font color of the search",
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                }, "borderColor": {
+                    "displayName": "Border color",   "displayNameKey": "Border Color",
+                    "description": "Border Color of the search ",
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "background": {
+                    "displayName": "Background Color", "displayNameKey": "Background Color",
+                    "description": "Background Color of the search ",
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                }}},
+        "scrollbar": {
+            "displayName": "Scrollbar", "displayNameKey": "Scrollbar",
+            "properties": {
+               
+                "scrollbarThumbColor": {
+                    "displayName": "Scrollbar Thumb Color", "displayNameKey": "Scrollbar Thumb Color",
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+             
+                "scrollbarTrackColor": {
+                    "displayName": "Scrollbar Track Color","displayNameKey": "Scrollbar Track Color",
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+        "tooltips": {   "supportEnhancedTooltips": true, 
+            "supportedTypes": {
+                "default": true,
+                "canvas": true
+            },
+            "roles": [
+                "tooltip"
+            ]
+        }
+    ,
+    "supportsSynchronizingFilterState": true,  
+    "supportsHighlight": true,"supportsLandingPage": true,"supportsEmptyDataView": true,
+    "suppressDefaultTitle": true,
+    "supportsKeyboardFocus": true,
+    "supportsMultiVisualSelection": true,  "sorting": {
+        "default": {}
+    },
+    "privileges": []
+}

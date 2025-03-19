@@ -1,0 +1,161 @@
+.dropdown-button {
+    display: flex;
+    justify-content: space-between; /* Align label and arrow */
+    align-items: center; /* Center items vertically */
+    padding: 10px;
+    background-color: #ffffff; /* Background color */
+    border: 1px solid #cccccc00; /* Border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer;
+    width: 100%; /* Full width */
+    box-shadow:0px 0px 10px 0px #00000000;
+}
+.external-dropdown-container {
+    position: relative;
+    z-index: 1000;
+    width: 100%; /* Assicurati che il contenitore esterno abbia una larghezza adeguata */
+    height: auto; /* Assicurati che il contenitore esterno abbia un'altezza adeguata */
+}
+.dropdown-arrow {
+    transition: transform 0.3s; /* Smooth transition for the arrow */
+}
+
+.dropdown-options {
+    border: 0px solid #cccccc00; /* Border for the dropdown options */
+    border-radius: 9px; /* Rounded corners */
+    background-color: #ffffff00; /* Background color for options */
+    margin-top: 5px; /* Margin for spacing */
+  
+    overflow-y:auto;/* Enable vertical scrolling */
+}
+.dropdown-options::-webkit-scrollbar {
+    width: 12px;
+}
+
+.dropdown-options::-webkit-scrollbar-track {
+    background-color: pink;
+}
+
+.dropdown-options::-webkit-scrollbar-thumb {
+    background-color:grey;
+    border-radius:8px;
+}
+.dropdown-options::-webkit-scrollbar-button {
+    display: none; /* Removes the up/down arrows */
+}
+.checkbox-item {
+    padding: 8px; /* Spacing for checkboxes */
+}
+.chip-container { 
+    display: flex;
+    flex-wrap: wrap; /* Permetti il wrapping delle chip quando necessario */
+    gap: 8px;
+    margin-top: 10px; /* Spazio orizzontale e verticale tra le chip */
+    margin-bottom: 10px; /* Spazio sotto le chip */
+    align-items: center; /* Allinea verticalmente le chip */
+}
+
+
+
+.chip-close {
+    margin-left: 5px; /* Space between chip text and close button */
+    cursor: pointer; /* Pointer cursor for close button */
+}
+.dropdown-options::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+    border-radius: 8px;
+}
+
+/* The scrollbar track (background) */
+.dropdown-options::-webkit-scrollbar-track {
+    background: transparent; /* Make the track transparent */ border-radius: 8px;
+}
+
+/* The draggable part of the scrollbar */
+.dropdown-options::-webkit-scrollbar-thumb {
+    background: #484441; /* Color of the scrollbar thumb */
+    border-radius: 8px; /* Rounded corners for the thumb */
+}
+
+/* The hover state for the scrollbar thumb */
+.dropdown-options::-webkit-scrollbar-thumb:hover {
+    background: #120101; /* Darker color on hover */
+}
+.dropdown-options::-webkit-scrollbar-button {
+    display: none; /* Nascondi le freccette */
+}.checkbox-item-hover {
+    background-color: #44f6cc;  /* Light grey hover effect */
+    transition: background-color 0.2s ease-in-out; 
+    border-radius: 9px; /* Smooth transition */
+}
+.chip {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px;
+    background-color: #ddd;
+    color: #333;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.tooltip {
+    position: absolute;
+    background-color: #fff;
+    color: #000;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+    z-index: 1000;
+}
+.clear-all-button {
+    background-color: #ff4d4d09;  /* Rosso per il bottone di cancellazione */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.clear-all-button:hover {
+    background-color: #e60000;  /* Colore più scuro al passaggio del mouse */
+}
+.custom-tooltip {
+    background-color: red;
+    color: #000000;
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 10px;
+}
+
+
+.dropdown-options {
+    background-color: rgba(255, 255, 255, 0);
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+ 
+    z-index: 9999!important; /* Assicura che la tendina sia sopra altri elementi */
+}.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.show {
+    display: block !important;
+}
+dropdown-button {
+    padding: 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#dropdown-content {
+    display: none;
+    flex-direction: column;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #c7ca1d;
+}
+
